@@ -36,7 +36,7 @@ impl Capturer {
     }
 }
 
-pub struct Frame<'a>(&'a [u8]);
+pub struct Frame<'a>(&'a mut [u8]);
 
 impl<'a> ops::Deref for Frame<'a> {
     type Target = [u8];
@@ -45,6 +45,11 @@ impl<'a> ops::Deref for Frame<'a> {
     }
 }
 
+impl<'a> ops::DerefMut for Frame<'a> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
 pub struct Display(dxgi::Display);
 
 impl Display {

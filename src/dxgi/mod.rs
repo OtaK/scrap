@@ -196,7 +196,7 @@ impl Capturer {
         }
     }
 
-    pub fn frame<'a>(&'a mut self, timeout: UINT) -> io::Result<&'a [u8]> {
+    pub fn frame<'a>(&'a mut self, timeout: UINT) -> io::Result<&'a mut [u8]> {
         unsafe {
             // Release last frame.
             // No error checking needed because we don't care.
@@ -217,7 +217,7 @@ impl Capturer {
             // Get next frame.
 
             self.load_frame(timeout)?;
-            Ok(slice::from_raw_parts(self.data, self.len))
+            Ok(slice::from_raw_parts_mut(self.data, self.len))
         }
     }
 }

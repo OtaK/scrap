@@ -43,6 +43,14 @@ impl<'a> ops::Deref for Frame<'a> {
     /// A frame is just an array of bytes.
     type Target = [u8];
 }
+
+impl<'a> ops::DerefMut for Frame<'a> {
+    /// Useful if you want to mutate the frame in place
+    /// Eg BGRA -> RGBA mapping
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
 ```
 
 ## The Frame Format

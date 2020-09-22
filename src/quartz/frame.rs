@@ -33,6 +33,12 @@ impl ops::Deref for Frame {
     }
 }
 
+impl ops::DerefMut for Frame {
+    fn deref_mut<'a>(&'a mut self) -> &'a mut Self::Target {
+        &mut self.inner
+    }
+}
+
 impl Drop for Frame {
     fn drop(&mut self) {
         unsafe {
